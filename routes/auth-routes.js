@@ -24,7 +24,14 @@ router.post('/register',async(req,res)=>{
       await newUser.save()
     }
  
-    
+    const token = jwt.sign(
+      { userId:newUser._id },
+      'SECRET',
+      {expiresIn: '1h'}
+   )
+   req.session.token = token
+   req.session.userId = newUser._id  
+
     if(req.get('Accept') === 'application/json'){
       return res.status(201).json({success:"User successfully registred"})
    } else {
