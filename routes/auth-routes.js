@@ -35,7 +35,7 @@ router.post('/register',async(req,res)=>{
     if(req.get('Accept') === 'application/json'){
       return res.status(201).json({success:"User successfully registred"})
    } else {
-      return res.redirect("/start") //redirect to the file
+      return res.redirect("/api/auth/login") //redirect to the file
    }
 
    }catch(e){
