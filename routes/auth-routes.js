@@ -22,20 +22,21 @@ router.post('/register',async(req,res)=>{
     } else {
       const newUser = new User({email,password,firstName,secondName})
       await newUser.save()
+      const token = jwt.sign(
+         { userId:newUser._id },
+         'SECRET',
+         {expiresIn: '1h'}
+      )
+      req.session.token = token
+      req.session.userId = newUser._id  
     }
  
-    const token = jwt.sign(
-      { userId:newUser._id },
-      'SECRET',
-      {expiresIn: '1h'}
-   )
-   req.session.token = token
-   req.session.userId = newUser._id  
+   
 
     if(req.get('Accept') === 'application/json'){
       return res.status(201).json({success:"User successfully registred"})
    } else {
-      return res.redirect("/api/auth/login") //redirect to the file
+      return res.redirect("/start") //redirect to the file
    }
 
    }catch(e){
