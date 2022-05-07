@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session'); 
 
-app.use(session({ secret: 'secret' }))
+router.use(session({ secret: 'secret' }))
 
 router.use(express.static(path.join(__dirname,'../public')))
 
