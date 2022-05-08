@@ -5,12 +5,14 @@ const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
 const jwt = require('jsonwebtoken')
-
+//var bodyParser = require('body-parser');
 const db = require('./controllers/connect')
 const homeRoute = require('./routes/home-routes')
 const auth = require('./routes/auth-routes')
-const Pages = require('./models/page-models')
-const User = require('./models/user-models')
+const Page = require('./models/answers-models')
+const User = require('./models/user-models');
+const Question = require('./models/questions-model');
+const Answer = require('./models/answers-models');
 
 app = express();
 
@@ -24,6 +26,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.json());
 app.use(session({ secret: 'secret' }))
+//app.use(bodyParser.urlencoded())
 
 // set up multer for storing uploaded files
 var storage = multer.diskStorage({
@@ -56,11 +59,85 @@ app.get('/start',async(req,res)=>{
 })
 
 app.get('/add',(req,res)=>{
-    res.render('add-page')
+    res.render('add-question')
 })
-app.post('/add',async(req,res)=>{
-    res.send('Input pages') 
+
+//app.get('/add-answer',(req,res)=>{
+//    res.render('add-answers')
+//})
+app.post('/add-questions',upload.single('photo'),async(req,res,next)=>{
+    const {name,text,currId,choice,nextQuestion,nextAnswer,nextId,prevId,photo} = req.body
+
+    const newQ = new Question({
+        name,
+        text,
+        choice,
+        currId,
+        nextQuestion,
+        nextAnswer,
+        prevId,
+        photo:
+        {
+            data: fs.readFileSync(path.join(__dirname,'uploads',req.file.filename)),
+            contentType: 'image/jpeg'
+        }
+    })
+
+    try{
+        const result = await newQ.save()
+    }catch(e){  
+        if(e.code!=11000){
+            return res.status(400).json({
+                "success": false,
+                "message": e.message
+              })
+        }else{
+            return res.status(400).json({
+                "success": false,
+                "message": "Error"
+              })
+        }
+    }
+
+    res.send('Page added') 
 })
+/*
+app.post('/add-answers',upload.single('photo'),async(req,res,next)=>{
+    const {name,text,currId,choice,nextId,prevId,photo} = req.body
+
+    const newAnsw = new Answer({
+        name,
+        text,
+        currId,
+        nextId,
+        prevId,
+        photo:
+        {
+            data: fs.readFileSync(path.join(__dirname,'uploads',req.file.filename)),
+            contentType: 'image/jpeg'
+        }
+    })
+
+    try{
+        const result = await newAnsw.save()
+    }catch(e){  
+        if(e.code!=11000){
+            return res.status(400).json({
+                "success": false,
+                "message": e.message
+              })
+        }else{
+            return res.status(400).json({
+                "success": false,
+                "message": "Error"
+              })
+        }
+    }
+
+    res.send('Answer added') 
+})
+
+*/
 
 app.listen(port,()=>{
     console.log('Server is running')

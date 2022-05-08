@@ -2,30 +2,70 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "Choose your side\nChoose 1 : [[1]]\nChoose 2 : [[2]]",
+		"body": "What do u want\n[[1]]\n[[2]]",
 		"position": {
-			"x": 843,
-			"y": 215
+			"x": 690,
+			"y": 178
 		},
 		"colorID": 0
 	},
 	{
 		"title": "1",
 		"tags": "",
-		"body": "You choose 1",
+		"body": "i want to end it\n[[3]]",
 		"position": {
-			"x": 655,
-			"y": 470
+			"x": 453,
+			"y": 454
 		},
 		"colorID": 0
 	},
 	{
 		"title": "2",
 		"tags": "",
-		"body": "You choose 2",
+		"body": "I want to start\n[[4]]",
 		"position": {
-			"x": 1056,
-			"y": 464
+			"x": 926,
+			"y": 476
+		},
+		"colorID": 0
+	},
+	{
+		"title": "4",
+		"tags": "",
+		"body": "Lets begin with test\nHow much do u want to earn\nInput:\nif>2000$[[5]]\nelse[[6]]",
+		"position": {
+			"x": 948,
+			"y": 760
+		},
+		"colorID": 0
+	},
+	{
+		"title": "3",
+		"tags": "",
+		"body": "OK u can go (",
+		"position": {
+			"x": 450,
+			"y": 750
+		},
+		"colorID": 0
+	},
+	{
+		"title": "5",
+		"tags": "",
+		"body": "I am putting a lot of faith on u !",
+		"position": {
+			"x": 670,
+			"y": 1072
+		},
+		"colorID": 0
+	},
+	{
+		"title": "6",
+		"tags": "",
+		"body": "You disappointed me !",
+		"position": {
+			"x": 1275,
+			"y": 1074
 		},
 		"colorID": 0
 	}

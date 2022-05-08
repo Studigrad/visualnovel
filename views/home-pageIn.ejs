@@ -28,14 +28,16 @@
                 <div id="text">
                     <%= foundPage.text %> 
                 </div>
-                <% for(let ch in answers){ %> 
-                    <div class="choice">
-                        <a href="/api/home/<%= answers[ch][0].nextQuestion %> "><%= answers[ch][0].text %> </a>
-                    </div>
-                 <% } %> 
+                <form action="/api/home/<%= foundPage.currId %> " method="POST">
+                    <input type="text" id="choice" placeholder 
+                    name="choose">
+                    <button class="button1" >Input</button>
+                </form>
+                      
+
             </div>
 	</div>
     
-    <script src='/js/scripts.js' type='text/javascript'></script>
+  
 </body>
 </html>
