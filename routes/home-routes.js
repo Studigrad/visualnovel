@@ -9,10 +9,19 @@ const User = require('../models/user-models')
 router.use(session({ secret: 'secret' }))
 router.use(express.static(path.join(__dirname,'../public')))
 
-// /api/home/
 
+router.use((req,res,next)=>{
+    if(req.session.userId){
+        return next()
+    }else{
+    return res.redirect('/api/auth/login')
+    }
+})
+
+// /api/home/id
 router.get('/:id',async(req,res)=>{
     const {id} = req.params
+    const foundUser = await User.findById(req.session.userId)
     const fQuest = await Questions.find({currId:id});
      //var arrOfPages = fQuest[0].nextQuestion.split(',')
      var arrOfPages = fQuest[0].nextAnswer.split(',')
@@ -29,19 +38,20 @@ router.get('/:id',async(req,res)=>{
             console.log(answers[answ][0].text)
         }
         
-       return res.render('home-page',{foundPage:fQuest[0],answers})
+       return res.render('home-page',{foundPage:fQuest[0],answers,foundUser})
     }else{
         console.log(fQuest[0].name )
         console.log(fQuest[0].text )
         console.log(fQuest[0].choice )
         
-       return res.render('home-pageIn',{foundPage:fQuest[0],choice:fQuest[0].choice})
+       return res.render('home-pageIn',{foundPage:fQuest[0],choice:fQuest[0].choice,foundUser})
     }
    
 })
 
 router.post('/:id',async(req,res)=>{
     const {id} = req.params
+    const foundUser = await User.findById(req.session.userId)
     const fQuest = await Questions.find({currId:id});
     const {choose} = req.body
     if(choose>fQuest[0].choice){

@@ -8,9 +8,20 @@
     <link rel="stylesheet" type="text/css" href="css/ui.css" />
     
     <title>Document</title>
-</head>
-<body>
+    
 
+        </head>
+
+        <body>
+        
+        <ul>
+            <li><a class="active" href="/start">HOME</a></li>
+            <li><a href="#news">SAVE</a></li>
+            <li><div class="title">INFO</div></li>
+          <li style="position: absolute;  right: 0; width: 200px; text-align:right;"><a href="#about"><%= foundUser.firstName %> <%= foundUser.secondName %></a></li>
+        </ul>
+       
+         
     <h1>VISUAL NOVEL</h1>
 
     <div id="container">
@@ -31,13 +42,21 @@
                 <form action="/api/home/<%= foundPage.currId %> " method="POST">
                     <input type="text" id="choice" placeholder 
                     name="choose">
-                    <button class="button1" >Input</button>
+                    <button class="button1" onclick="playCl()">Input</button>
                 </form>
-                      
+                <audio id="audioCl" src="music/knopka.mp3" volume="0.5"></audio>    
 
             </div>
 	</div>
+    <script>
+            function playCl() {
+          var audioCL = document.getElementById("audioCl");
+          audioCL.volume = 0.5;
+          audioCL.play();
+        }
+
     
-  
+      </script>
+   
 </body>
 </html>

@@ -1,5 +1,4 @@
-
-function onCheck(check) {
-    let choice = document.getElementById("choice").value
-    
-  }
+function play() {
+  var audio = new Audio("../music/knopka.mp3");
+  audio.play();
+}

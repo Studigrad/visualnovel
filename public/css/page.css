@@ -21,6 +21,45 @@ a {
 	background-color: #4CAF50; /* Green */
 	color: white;
   }
+
+
+  ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+  }
+  
+  li {
+	float: left;
+  }
+  
+  li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-family: 'Poiret One', sans-serif;
+	text-shadow:0px 0px 50px pink;
+  }
+  li div {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-family: 'Poiret One', sans-serif;
+	text-shadow:0px 0px 50px pink;
+  }
+   li div:hover {
+	cursor: pointer;
+	background-color: #111;
+  }
+  li a:hover {
+	background-color: #111;
+  }
 #container
 {
 	font-size:17px;

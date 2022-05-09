@@ -40,6 +40,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
+
 app.get('/',(req,res)=>{
     if(req.session.userId){
         res.redirect('/start')
@@ -54,8 +55,12 @@ app.use('/api/auth',auth)
 
 
 app.get('/start',async(req,res)=>{
+    if(req.session.userId){
     const foundUser = await User.findById(req.session.userId)
     res.render('start-page',{foundUser})
+    }else{
+        res.redirect('/api/auth/login')
+    }
 })
 
 app.get('/add',(req,res)=>{

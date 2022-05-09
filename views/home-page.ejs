@@ -8,8 +8,19 @@
     <link rel="stylesheet" type="text/css" href="css/ui.css" />
     
     <title>Document</title>
-</head>
-<body>
+    
+
+        </head>
+
+        <body>
+        
+        <ul>
+          <li><a class="active" href="/start">HOME</a></li>
+          <li><a href="#news">SAVE</a></li>
+          <li><div class="title">INFO</div></li>
+          <li style="position: absolute;  right: 0; width: 200px; text-align:right;"><a href="#about"><%= foundUser.firstName.toUpperCase() %>  <%= foundUser.secondName.toUpperCase() %></a></li>
+        </ul>
+      
 
     <h1>VISUAL NOVEL</h1>
 
@@ -30,12 +41,23 @@
                 </div>
                 <% for(let ch in answers){ %> 
                     <div class="choice">
-                        <a href="/api/home/<%= answers[ch][0].nextQuestion %> "><%= answers[ch][0].text %> </a>
+                        <a href="/api/home/<%= answers[ch][0].nextQuestion %> " onclick="playCl()"><%= answers[ch][0].text %> </a>
                     </div>
                  <% } %> 
             </div>
+            <audio id="audioCl" src="music/knopka.mp3" volume="0.5"></audio>
+
 	</div>
+    <script>
+         function playCl() {
+          var audioCL = document.getElementById("audioCl");
+          audioCL.volume = 0.5;
+          audioCL.play();
+        }
+
+
+        
+      </script>
     
-    <script src='/js/scripts.js' type='text/javascript'></script>
 </body>
 </html>
