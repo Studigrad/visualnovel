@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf8"/>
+
+	<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+
+	<link href="css/reset.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<h1>VISUAL NOVEL</h1>
+
+	<div id="container">
+        <h2>CHOOSE YOUR LOAD</h2>
+		<ul>
+            <% for (let sav in foundUser.savings){ %> 
+                <li>
+                    <a href="/api/home/<%=pages[sav][0].currId %>" style="text-decoration: none; outline: 0; color: inherit;">
+
+                    <div class="card 1">
+                        <div class="card_image">
+                            <img src="data:image/<%= pages[sav][0].photo.contentType %>;base64,
+                            <%=pages[sav][0].photo.data.toString('base64')%>">
+                            </div>
+                        <div class="card_title title-white">
+                          <p><%= pages[sav][0].text %> </p>
+                        </div>
+                      </div>
+                    </a>
+                </li>
+                <% } %> 
+            
+        </ul>
+	</div>
+
+</body>
+
+</html>

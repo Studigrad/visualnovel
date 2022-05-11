@@ -6,9 +6,11 @@ const session = require('express-session');
 const Answers = require('../models/answers-models')
 const Questions = require('../models/questions-model')
 const User = require('../models/user-models')
+
 router.use(session({ secret: 'secret' }))
 router.use(express.static(path.join(__dirname,'../public')))
-
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
 router.use((req,res,next)=>{
     if(req.session.userId){
@@ -18,11 +20,32 @@ router.use((req,res,next)=>{
     }
 })
 
+// /api/home/
+router.get('/',async(req,res)=>{
+    const foundUser = await User.findById(req.session.userId)
+    res.render('start-page',{foundUser})
+})
+
+// /api/home/load
+router.get('/load',async(req,res)=>{
+    const foundUser = await User.findById(req.session.userId)
+    let pages = []
+    for (let sav in foundUser.savings){
+        let quest = await Questions.find({currId:foundUser.savings[sav]})
+        pages.push(quest)
+    }
+    for (let sav in foundUser.savings){
+        console.log(pages[sav][0].name)
+    }
+    res.render('load-page',{foundUser,pages})
+})
+
 // /api/home/id
 router.get('/:id',async(req,res)=>{
     const {id} = req.params
     const foundUser = await User.findById(req.session.userId)
     const fQuest = await Questions.find({currId:id});
+    req.session.page = id
      //var arrOfPages = fQuest[0].nextQuestion.split(',')
      var arrOfPages = fQuest[0].nextAnswer.split(',')
     let answers = []
@@ -49,6 +72,18 @@ router.get('/:id',async(req,res)=>{
    
 })
 
+// /api/home/save
+router.post('/save',async(req,res)=>{
+    const {currId} = req.body
+    console.log(currId)
+    const currentUser = await User.findById(req.session.userId)
+    currentUser.savings.push(currId)
+    await currentUser.save()
+    console.log('saved')
+    res.redirect(`/api/home/${currId}`)
+})
+
+// /api/home/id
 router.post('/:id',async(req,res)=>{
     const {id} = req.params
     const foundUser = await User.findById(req.session.userId)
@@ -62,8 +97,6 @@ router.post('/:id',async(req,res)=>{
 })
 
 
-router.get('/',async(req,res)=>{
-    const foundUser = await User.findById(req.session.userId)
-    res.render('start-page',{foundUser})
-})
+
+
 module.exports = router

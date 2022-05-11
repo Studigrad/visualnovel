@@ -9,14 +9,22 @@
     
     <title>Document</title>
     
-
         </head>
 
         <body>
         
         <ul>
             <li><a class="active" href="/start">HOME</a></li>
-            <li><a href="#news">SAVE</a></li>
+            <li>
+                <div>
+                  <form action="save" method="post">  
+                      <input type="hidden" name="currId" value="<%= foundPage.currId %>"/>
+                      <button name="mysubmitbutton" id="mysubmitbutton" type="submit" class="custom-btn btn-1" onclick="showAlert()">  
+                          SAVE
+                      </button>  
+                     </form>
+                </div>
+              </li>
             <li><div class="title">INFO</div></li>
           <li style="position: absolute;  right: 0; width: 200px; text-align:right;"><a href="#about"><%= foundUser.firstName %> <%= foundUser.secondName %></a></li>
         </ul>
@@ -48,15 +56,8 @@
 
             </div>
 	</div>
-    <script>
-            function playCl() {
-          var audioCL = document.getElementById("audioCl");
-          audioCL.volume = 0.5;
-          audioCL.play();
-        }
 
-    
-      </script>
+    <script src="scripts/scripts.js"></script>
    
 </body>
 </html>

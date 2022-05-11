@@ -16,7 +16,12 @@ const UserSchema = Schema({
     },
     secondName:{
         type:String
-    }
+    },
+    savings:[
+        {
+            type:String
+        }
+    ]
 })
 
 const User = mongoose.model('User',UserSchema)

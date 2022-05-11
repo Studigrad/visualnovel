@@ -57,6 +57,7 @@ app.use('/api/auth',auth)
 app.get('/start',async(req,res)=>{
     if(req.session.userId){
     const foundUser = await User.findById(req.session.userId)
+    req.session.page = '0'
     res.render('start-page',{foundUser})
     }else{
         res.redirect('/api/auth/login')
