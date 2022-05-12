@@ -24,11 +24,23 @@
               </div>
             </li>
           <li><div class="title">INFO</div></li>
-          <li style="position: absolute;  right: 0; width: 200px; text-align:right;"><a href="#about"><%= foundUser.firstName.toUpperCase() %>  <%= foundUser.secondName.toUpperCase() %></a></li>
-        </ul>
-      
-    <h1>VISUAL NOVEL</h1>
+          <div style="position: absolute;  right: 0; width: 200px; text-align:right;">
+            <div class="dropdown">
+                <button class="dropbtn"><%= foundUser.firstName.toUpperCase() %>  <%= foundUser.secondName.toUpperCase() %> 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">ON/OFF MUSIC</a>
+                  <a href="#">CHOOSE THEME</a>
+                  <a href="/api/auth/login">LOG OUT</a>
+                </div>
+              </div> 
+          </div>
+          
+           </ul>
+ 
 
+    <h1>VISUAL NOVEL</h1>
     <div id="container">
             <div id="sceneContent">
                     <img src="data:image/<%= foundPage.photo.contentType %>;base64,
@@ -61,5 +73,6 @@
            var getTest = "<%= foundPage.currId  %>";  //var test is now assigned to getTest which will only work on browsers
            console.log(getTest);  // successfully prints 101 on browser
         </script>
+        
 </body>
 </html>
