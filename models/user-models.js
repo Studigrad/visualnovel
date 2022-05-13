@@ -21,6 +21,11 @@ const UserSchema = Schema({
         {
             type:String
         }
+    ],
+    achievements:[
+        {
+            type:String
+        }
     ]
 })
 

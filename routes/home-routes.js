@@ -26,6 +26,18 @@ router.get('/',async(req,res)=>{
     res.render('start-page',{foundUser})
 })
 
+// /api/home/achievements
+router.get('/achievements',async(req,res)=>{
+    const foundUser = await User.findById(req.session.userId)
+    res.render('trophey-page',{foundUser})
+})
+
+// /api/home/info
+router.get('/info',async(req,res)=>{
+    const foundUser = await User.findById(req.session.userId)
+    res.render('info-page',{foundUser})
+})
+
 // /api/home/load
 router.get('/load',async(req,res)=>{
     const foundUser = await User.findById(req.session.userId)
@@ -45,6 +57,20 @@ router.get('/:id',async(req,res)=>{
     const {id} = req.params
     const foundUser = await User.findById(req.session.userId)
     const fQuest = await Questions.find({currId:id});
+    
+    console.log('nextAnswer text : ',fQuest[0].nextAnswer)
+    try{
+        const answer = await Questions.find({currId : fQuest[0].nextAnswer})
+        if(!answer.nextAnswer && !answer.nextQuestion){
+            console.log('Achievment text : ',answer[0].text)
+            if(!foundUser.achievements.includes(answer[0].text)){
+                foundUser.achievements.push(answer[0].text)
+                await foundUser.save()
+            }
+        }
+    }catch{
+        console.log('skipped')
+    }
     req.session.page = id
      //var arrOfPages = fQuest[0].nextQuestion.split(',')
      var arrOfPages = fQuest[0].nextAnswer.split(',')
@@ -60,7 +86,7 @@ router.get('/:id',async(req,res)=>{
         for(let answ in answers){
             console.log(answers[answ][0].text)
         }
-        
+       
        return res.render('home-page',{foundPage:fQuest[0],answers,foundUser})
     }else{
         console.log(fQuest[0].name )

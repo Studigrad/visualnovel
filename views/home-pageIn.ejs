@@ -25,13 +25,14 @@
                      </form>
                 </div>
               </li>
-            <li><div class="title">INFO</div></li>
+            <li><a class="active" >INFO</a></li>
             <div style="position: absolute;  right: 0; width: 200px; text-align:right;">
                 <div class="dropdown">
                     <button class="dropbtn"><%= foundUser.firstName.toUpperCase() %>  <%= foundUser.secondName.toUpperCase() %> 
                       <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
+                      <a href="achievements">LOOK ACHIEVEMENTS</a>
                       <a href="#">ON/OFF MUSIC</a>
                       <a href="#">CHOOSE THEME</a>
                       <a href="/api/auth/login">LOG OUT</a>
@@ -45,8 +46,7 @@
 
     <div id="container">
             <div id="sceneContent">
-                    <img src="data:image/<%= foundPage.photo.contentType %>;base64,
-                    <%=foundPage.photo.data.toString('base64')%>">
+                <img src="img/<%= foundPage.img %> ">
             </div>
         <div id="placeName">
             <h3>Woods</h3>

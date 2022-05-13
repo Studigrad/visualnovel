@@ -13,23 +13,24 @@
 	<h1>VISUAL NOVEL</h1>
 
 	<div id="container">
-        <h2>CHOOSE YOUR LOAD</h2>
+        <h2>ACHIEVEMENTS</h2>
 		<ul>
-            <% for (let sav in foundUser.savings){ %> 
+            <% for (let sav in foundUser.achievements){ %> 
+                <% if(foundUser.achievements[sav]!=null){ %> 
                 <li>
-                    <a href="c<%=pages[sav][0].currId %>" style="text-decoration: none; outline: 0; color: inherit;">
-
                     <div class="card 1">
                         <div class="card_image">
-                            <img src="img/<%= pages[sav][0].img %> ">
+                            <img src="img/trophy.jpg">
                             </div>
                         <div class="card_title title-white">
-                          <p><%= pages[sav][0].text %> </p>
+                          <p><%= foundUser.achievements[sav]%> </p>
                         </div>
                       </div>
                     </a>
                 </li>
                 <% } %> 
+                <% } %> 
+            
             
         </ul>
 	</div>

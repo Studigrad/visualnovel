@@ -10,6 +10,9 @@ const questSchema = Schema({
         type:String,
         required:true
     },
+    img:{
+        type:String,
+    },
     photo:{
         data: Buffer,
         contentType: String
