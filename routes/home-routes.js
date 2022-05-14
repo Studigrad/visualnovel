@@ -57,8 +57,6 @@ router.get('/:id',async(req,res)=>{
     const {id} = req.params
     const foundUser = await User.findById(req.session.userId)
     const fQuest = await Questions.find({currId:id});
-    
-    console.log('nextAnswer text : ',fQuest[0].nextAnswer)
     try{
         const answer = await Questions.find({currId : fQuest[0].nextAnswer})
         if(!answer.nextAnswer && !answer.nextQuestion){
