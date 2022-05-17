@@ -61,7 +61,7 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({error:"User not found"})
          }else{
             let message = "User not found" 
-            res.render('error-page',{message})
+            return res.render('error-page',{message})
          }
       }
       if(password != foundUser.password){
@@ -69,9 +69,8 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({error:"Password is incorrect"})
          }else{
             let message = "Password is incorrect" 
-            res.render('error-page',{message})
-         }
-         
+            return res.render('error-page',{message})
+         } 
       }
 
       const token = jwt.sign(
@@ -83,13 +82,13 @@ router.post('/login',async(req,res)=>{
       req.session.userId = foundUser._id  
        
       if(req.get('Accept') === 'application/json'){
-         res.json({token,userId:foundUser._id})
+         return res.json({token,userId:foundUser._id})
       } else {
          return res.redirect("/start") //redirect to the file
       }
 
    }catch(e){
-      res.status(500).json({error:e})
+     return res.status(500).json({error:e})
    }
 })
 
