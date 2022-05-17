@@ -11,6 +11,7 @@ const db =  function(){
   mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!!');
 });
+  return true
 }
 
 module.exports = db

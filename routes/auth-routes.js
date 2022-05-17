@@ -57,10 +57,21 @@ router.post('/login',async(req,res)=>{
       const foundUser = await User.findOne({email})
 
       if(!foundUser){
-         return res.status(400).json({error:"User not found"})
+         if(req.get('Accept') === 'application/json'){
+            return res.status(400).json({error:"User not found"})
+         }else{
+            let message = "User not found" 
+            res.render('error-page',{message})
+         }
       }
-      if(!password == foundUser.password){
-         return res.status(400).json({error:"Password is incorrect"})
+      if(password != foundUser.password){
+         if(req.get('Accept') === 'application/json'){
+            return res.status(400).json({error:"Password is incorrect"})
+         }else{
+            let message = "Password is incorrect" 
+            res.render('error-page',{message})
+         }
+         
       }
 
       const token = jwt.sign(
