@@ -1,4 +1,4 @@
-
+//tried to add click sound
 function playCl() {
   var audioCL = document.getElementById("audioCl");
   audioCL.volume = 0.5;
