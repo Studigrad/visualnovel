@@ -9,7 +9,7 @@ process.env.MONGODB_URI =`mongodb://studigrad:Il26032002@cluster0-shard-00-00.ey
 });
 
   mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!!');
+    console.log('Mongoose is connected!!!');
 });
 
 Question.insertMany([
