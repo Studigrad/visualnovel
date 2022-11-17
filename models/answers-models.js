@@ -1,3 +1,4 @@
+//in mingo db cloud
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
