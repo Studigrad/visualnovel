@@ -6,7 +6,7 @@ const User = require('../models/user-models')
 
 router.use(session({ secret: 'secret' }))
 
-// /api/auth/register
+// /api/auth/register/
 router.get('/register',(req,res)=>{
    res.render('register-page')
  })
