@@ -2,7 +2,7 @@ const User = require('../models/user-models')
 const db = require('../controllers/connect')
 const mongoose = require('mongoose');
 /*
-test('My first test', () => {
+test('My 1 first test', () => {
     expect(Math.max(1, 5, 10)).toBe(5);
 });
 */
